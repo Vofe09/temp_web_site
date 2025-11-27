@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Кураторский час </title>
+  <style>
+    /* --- Переменные --- */
+    :root{
+      --bg-1: #06060b;
+      --bg-2: #0f1530;
+      --glass: rgba(255,255,255,0.04);
+      --accent: #ffd54a;
+      --accent-2: #ff7ab6;
+      --white: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; -webkit-font-smoothing:antialiased; background:radial-gradient(1200px 600px at 10% 10%, rgba(255,122,182,0.06), transparent), radial-gradient(900px 500px at 90% 90%, rgba(255,213,74,0.04), transparent), linear-gradient(180deg,var(--bg-1),var(--bg-2)); color:var(--white);}
+
+    /* Decorative animated shapes */
+    .decor{
+      position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden
+    }
+    .blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:0.28;mix-blend-mode:screen;animation:float 18s ease-in-out infinite}
+    .blob.b1{width:540px;height:540px;left:-120px;top:-80px;background:linear-gradient(135deg,var(--accent),var(--accent-2));animation-duration:22s}
+    .blob.b2{width:420px;height:420px;right:-80px;bottom:-120px;background:linear-gradient(135deg,#3ddc97,#2ec4ff);opacity:0.12;animation-duration:28s}
+    @keyframes float{0%{transform:translateY(0) translateX(0)}50%{transform:translateY(-36px) translateX(18px)}100%{transform:translateY(0) translateX(0)}}
+
+    /* Header */
+    header{position:relative;z-index:5;padding:64px 22px 18px;text-align:center}
+    h1{font-weight:700;margin:0;color:transparent;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;font-size:clamp(32px,14vw,50px);letter-spacing:8px;text-transform:uppercase}
+    p.lead{margin-top:8px;margin-bottom:0;color:var(--muted);font-size:15px}
+
+    /* Gallery container */
+    .wrap{position:relative;z-index:6;max-width:1300px;margin:40px auto;padding:28px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+
+    /* Card style */
+    .card{position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));box-shadow:0 6px 30px rgba(2,6,23,0.6);min-height:360px;transform:translateY(30px);opacity:0;transition:transform 700ms cubic-bezier(.2,.9,.3,1),opacity 700ms ease}
+    .card.visible{transform:none;opacity:1}
+    .card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms cubic-bezier(.2,.9,.3,1)}
+    .card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%, rgba(0,0,0,0.45) 100%);pointer-events:none}
+
+    /* Overlay info */
+    .meta{position:absolute;left:18px;bottom:18px;color:var(--white);z-index:3}
+    .meta .title{font-weight:700;letter-spacing:0.6px}
+    .meta .sub{font-size:13px;color:rgba(255,255,255,0.8);margin-top:6px}
+
+    /* Hover effects */
+    .card:hover img{transform:scale(1.06) translateY(-6px)}
+    .card:hover{box-shadow:0 26px 70px rgba(2,6,23,0.85);transform:translateY(-8px)}
+
+    /* Responsive */
+    @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:72px}.card{min-height:240px}}
+
+    /* Big centered hero card that spans width */
+    .hero{grid-column:1/-1;display:flex;align-items:center;justify-content:center;padding:28px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:18px;min-height:220px}
+    .hero .label{font-weight:800;font-size:20px;color:var(--muted);letter-spacing:2px}
+
+    /* subtle ribbon */
+    .ribbon{position:absolute;right:18px;top:18px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#0a0a0a;padding:8px 12px;border-radius:10px;font-weight:700;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,0.4)}
+
+    /* footer */
+    footer{margin:44px 0 80px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* small animation for entry sequence */
+    .stagger{transition-delay:0ms}
+    /* Mobile: stack images vertically */
+    @media (max-width: 768px) {
+    .gallery {
+        grid-template-columns: 1fr !important;
+    }
+    .photo-card {
+        width: 100%;
+        height: auto;
+    }
+    .photo-card img {
+        height: auto;
+    }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="decor">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <header>
+    <h1>Кураторский час</h1>
+    <p class="lead"> проведенный Гульнарой Барлыковной</p>
+  </header>
+
+  <main class="wrap" id="app">
+    <div class="grid">
+      <!-- Hero card (широкая) -->
+      <div class="hero card" data-idx="0">
+        <div style="text-align:left;width:100%;max-width:980px;">
+          <div class="ribbon">Live</div>
+          <div class="label" style="font-size:20px;color:var(--muted);">Мы провели кураторский час,</div>
+          <h2 style="margin:8px 0 0;font-size:28px;letter-spacing:1px;">и это стало важным шагом в начале нашего совместного пути. Мы коротко обсудили устройство учёбы, возможности студенческой жизни и основные правила, которые помогут быстрее адаптироваться. Ответили на самые частые вопросы и пообщались в тёплой, дружеской атмосфере. За этот час мы успели лучше познакомиться и почувствовать себя единой командой.</h2>
+        </div>
+      </div>
+
+      <!-- Шесть карточек — 2 ряда по 3 -->
+      <figure class="card" data-idx="1"><img src="img/photo11.jpg" alt="Фото 1"><figcaption class="meta"><div class="title">Номер 1</div><div class="sub">Премьера</div></figcaption></figure>
+      <figure class="card" data-idx="2"><img src="img/photo12.jpg" alt="Фото 2"><figcaption class="meta"><div class="title">Номер 2</div><div class="sub">Аудитория</div></figcaption></figure>
+      <figure class="card" data-idx="3"><img src="img/photo13.jpg" alt="Фото 3"><figcaption class="meta"><div class="title">Номер 3</div><div class="sub">Пародии</div></figcaption></figure>
+
+                  <!-- Hero card (широкая) -->
+      <div class="hero card" data-idx="0">
+        <div style="text-align:left;width:100%;max-width:980px;">
+          <div class="ribbon">Live</div>
+          <div class="label" style="font-size:20px;color:var(--muted);"> Мы провели кураторский час к 80-летию Великой Победы, </div>
+          <h2 style="margin:8px 0 0;font-size:28px;letter-spacing:1px;"> вспомнили основные этапы Великой Отечественной войны и обсудили цену победы. Говорили о самоотверженности и мужестве народа, которые привели к освобождению страны и разгрому фашизма. Этот разговор помог нам ещё раз осознать масштаб подвига и сохранить память о героическом прошлом. </h2>
+        </div>
+      </div>
+
+      <figure class="card" data-idx="4"><img src="img/photo14.jpg" alt="Фото 4"><figcaption class="meta"><div class="title">Номер 4</div><div class="sub">Энергия</div></figcaption></figure>
+      <figure class="card" data-idx="5"><img src="img/photo15.jpg" alt="Фото 5"><figcaption class="meta"><div class="title">Номер 5</div><div class="sub">Интерактив</div></figcaption></figure>
+      <figure class="card" data-idx="6"><img src="img/photo16.jpg" alt="Фото 6"><figcaption class="meta"><div class="title">Номер 6</div><div class="sub">Финал</div></figcaption></figure>
+
+
+
+
+    </div>
+
+    <footer>Спасибо за внимание!</footer>
+  </main>
+
+  <script>
+    // Плавное появление при скролле + небольшая последовательность
+    const cards = document.querySelectorAll('.card');
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          const idx = Number(el.dataset.idx || 0);
+          // задержка по индексу
+          el.style.transitionDelay = (idx * 80) + 'ms';
+          el.classList.add('visible');
+          obs.unobserve(el);
+        }
+      });
+    },{threshold:0.18});
+    cards.forEach(c=>io.observe(c));
+
+    // Клик по фото — открыть в новом окне (простая lightbox)
+    document.querySelectorAll('.card img').forEach(img=>{
+      img.style.cursor='zoom-in';
+      img.addEventListener('click', e=>{
+        const src = e.currentTarget.src;
+        const w = window.open('');
+        w.document.write(`<!doctype html><title>Просмотр</title><style>body{margin:0;background:#000;display:flex;align-items:center;justify-content:center;height:100vh}img{max-width:95vw;max-height:95vh}</style><img src="${src}">`);
+      });
+    });
+
+    // Совет: если хотите параллакс-эффект мелких движений при движении мыши
+    document.addEventListener('mousemove', (e) => {
+      const cx = window.innerWidth/2; const cy = window.innerHeight/2;
+      const dx = (e.clientX - cx) / cx; const dy = (e.clientY - cy) / cy;
+      document.querySelectorAll('.blob').forEach((b,i)=>{
+        const mul = i?1:-1; b.style.transform = `translate(${dx*20*mul}px, ${dy*10*mul}px)`;
+      });
+    });
+  </script>
+</body>
+</html>
