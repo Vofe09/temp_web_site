@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Conference Hall — Host</title>
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<style>
+body{
+    margin:0;
+    background:linear-gradient(180deg,#06060b,#0f1530);
+    color:white;
+    font-family:Inter, sans-serif;
+}
+.wrap{
+    max-width:900px;
+    margin:40px auto;
+    text-align:center;
+}
+h1{
+    background:linear-gradient(90deg,#ffd54a,#ff7ab6);
+    -webkit-background-clip:text;
+    color:transparent;
+    font-size:48px;
+}
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:22px;
+    backdrop-filter:blur(10px);
+    margin-top:20px;
+}
+button{
+    margin-top:20px;
+    padding:14px 28px;
+    font-size:16px;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(90deg,#ffd54a,#ff7ab6);
+    color:#0c0c0c;
+    font-weight:700;
+    cursor:pointer;
+}
+video{
+    width:100%;
+    margin-top:25px;
+    border-radius:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+    <h1>Хост — Конференц зал</h1>
+
+    <div class="card">
+        <p>Ваш ID для подключения:</p>
+        <h2 id="host-id">...</h2>
+
+        <button id="shareBtn">Поделиться экраном</button>
+        <video id="screen" autoplay playsinline></video>
+    </div>
+</div>
+
+<script>
+const peer = new Peer();
+let currentStream = null;
+
+// показываем host ID
+peer.on('open', id => {
+    document.getElementById("host-id").textContent = id;
+});
+
+// принимаем подключения
+peer.on('call', call => {
+    if(currentStream) call.answer(currentStream);
+});
+
+// начать шаринг экрана
+document.getElementById("shareBtn").onclick = async () => {
+    currentStream = await navigator.mediaDevices.getDisplayMedia({
+        video:true,
+        audio:false
+    });
+
+    document.getElementById("screen").srcObject = currentStream;
+};
+</script>
+
+</body>
+</html>
