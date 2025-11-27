@@ -5,6 +5,50 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Кураторский час </title>
   <style>
+
+/* --- Новый мини-хедер, теперь не на всю ширину --- */
+#mini-header {
+    margin: 20px auto;               /* центрируем */
+    padding: 18px 26px;
+    max-width: 780px;                /* <<< ГЛАВНОЕ: ограничиваем ширину */
+    width: 90%;                      /* на мобильных чуть уже экрана */
+    
+    background: linear-gradient(135deg,
+      rgba(255,213,74,0.12),
+      rgba(255,122,182,0.10)
+    );
+
+    border-radius: 22px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 6px 30px rgba(2,6,23,0.5);
+}
+
+/* Навигация */
+#mini-header nav {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+/* Ссылки */
+#mini-header nav a {
+    text-decoration: none;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.6px;
+    transition: color .25s ease, transform .25s ease;
+}
+
+/* Hover */
+#mini-header nav a:hover {
+    color: #ffd54a;
+    transform: translateY(-2px);
+}
+
+
+
     /* --- Переменные --- */
     :root{
       --bg-1: #06060b;
@@ -54,7 +98,21 @@
 
     /* Responsive */
     @media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:72px}.card{min-height:240px}}
+    @media (max-width:640px){
+    .grid{
+        grid-template-columns:1fr;
+    }
+    h1{
+        font-size:clamp(28px, 10vw, 40px);
+        letter-spacing:4px;
+        word-break:break-word;
+        overflow-wrap:break-word;
+    }
+    .card{
+        min-height:240px;
+    }
+    }
+
 
     /* Big centered hero card that spans width */
     .hero{grid-column:1/-1;display:flex;align-items:center;justify-content:center;padding:28px;background:linear-gradient(90deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:18px;min-height:220px}
@@ -80,6 +138,10 @@
     .photo-card img {
         height: auto;
     }
+
+
+
+
     }
 
   </style>
@@ -89,6 +151,14 @@
     <div class="blob b1"></div>
     <div class="blob b2"></div>
   </div>
+    <header id="mini-header">
+        <nav>
+            <a href="index.html">КВН</a>
+            <a href="cur.html">Кураторский час</a>
+            <a href="host.html">Род. Собрание</a>
+        </nav>
+    </header>
+
 
   <header>
     <h1>Кураторский час</h1>
@@ -101,28 +171,28 @@
       <div class="hero card" data-idx="0">
         <div style="text-align:left;width:100%;max-width:980px;">
           <div class="ribbon">Live</div>
-          <div class="label" style="font-size:20px;color:var(--muted);">Мы провели кураторский час,</div>
-          <h2 style="margin:8px 0 0;font-size:28px;letter-spacing:1px;">и это стало важным шагом в начале нашего совместного пути. Мы коротко обсудили устройство учёбы, возможности студенческой жизни и основные правила, которые помогут быстрее адаптироваться. Ответили на самые частые вопросы и пообщались в тёплой, дружеской атмосфере. За этот час мы успели лучше познакомиться и почувствовать себя единой командой.</h2>
+          <div class="label" style="font-size:24px;color:var(--muted);">Мы провели кураторский час,</div>
+          <h2 style="margin:8px 0 0;font-size:16px;letter-spacing:1px;">и это стало важным шагом в начале нашего совместного пути. Мы коротко обсудили устройство учёбы, возможности студенческой жизни и основные правила, которые помогут быстрее адаптироваться. Ответили на самые частые вопросы и пообщались в тёплой, дружеской атмосфере. За этот час мы успели лучше познакомиться и почувствовать себя единой командой.</h2>
         </div>
       </div>
 
       <!-- Шесть карточек — 2 ряда по 3 -->
-      <figure class="card" data-idx="1"><img src="img/photo11.jpg" alt="Фото 1"><figcaption class="meta"><div class="title">Номер 1</div><div class="sub">Премьера</div></figcaption></figure>
-      <figure class="card" data-idx="2"><img src="img/photo12.jpg" alt="Фото 2"><figcaption class="meta"><div class="title">Номер 2</div><div class="sub">Аудитория</div></figcaption></figure>
-      <figure class="card" data-idx="3"><img src="img/photo13.jpg" alt="Фото 3"><figcaption class="meta"><div class="title">Номер 3</div><div class="sub">Пародии</div></figcaption></figure>
+      <figure class="card" data-idx="1"><img src="img/photo11.jpg" alt="Фото 1"><figcaption class="meta"><div class="title"> 1</div><div class="sub"></div></figcaption></figure>
+      <figure class="card" data-idx="2"><img src="img/photo12.jpg" alt="Фото 2"><figcaption class="meta"><div class="title"> 2</div><div class="sub"></div></figcaption></figure>
+      <figure class="card" data-idx="3"><img src="img/photo13.jpg" alt="Фото 3"><figcaption class="meta"><div class="title"> 3</div><div class="sub"></div></figcaption></figure>
 
                   <!-- Hero card (широкая) -->
       <div class="hero card" data-idx="0">
         <div style="text-align:left;width:100%;max-width:980px;">
           <div class="ribbon">Live</div>
-          <div class="label" style="font-size:20px;color:var(--muted);"> Мы провели кураторский час к 80-летию Великой Победы, </div>
-          <h2 style="margin:8px 0 0;font-size:28px;letter-spacing:1px;"> вспомнили основные этапы Великой Отечественной войны и обсудили цену победы. Говорили о самоотверженности и мужестве народа, которые привели к освобождению страны и разгрому фашизма. Этот разговор помог нам ещё раз осознать масштаб подвига и сохранить память о героическом прошлом. </h2>
+          <div class="label" style="font-size:24px;color:var(--muted);"> Мы провели кураторский час к 80-летию Великой Победы, </div>
+          <h2 style="margin:8px 0 0;font-size:16px;letter-spacing:1px;"> вспомнили основные этапы Великой Отечественной войны и обсудили цену победы. Говорили о самоотверженности и мужестве народа, которые привели к освобождению страны и разгрому фашизма. Этот разговор помог нам ещё раз осознать масштаб подвига и сохранить память о героическом прошлом. </h2>
         </div>
       </div>
 
-      <figure class="card" data-idx="4"><img src="img/photo14.jpg" alt="Фото 4"><figcaption class="meta"><div class="title">Номер 4</div><div class="sub">Энергия</div></figcaption></figure>
-      <figure class="card" data-idx="5"><img src="img/photo15.jpg" alt="Фото 5"><figcaption class="meta"><div class="title">Номер 5</div><div class="sub">Интерактив</div></figcaption></figure>
-      <figure class="card" data-idx="6"><img src="img/photo16.jpg" alt="Фото 6"><figcaption class="meta"><div class="title">Номер 6</div><div class="sub">Финал</div></figcaption></figure>
+      <figure class="card" data-idx="4"><img src="img/photo14.jpg" alt="Фото 4"><figcaption class="meta"><div class="title"> 4</div><div class="sub"></div></figcaption></figure>
+      <figure class="card" data-idx="5"><img src="img/photo15.jpg" alt="Фото 5"><figcaption class="meta"><div class="title"> 5</div><div class="sub"></div></figcaption></figure>
+      <figure class="card" data-idx="6"><img src="img/photo16.jpg" alt="Фото 6"><figcaption class="meta"><div class="title"> 6</div><div class="sub"></div></figcaption></figure>
 
 
 
