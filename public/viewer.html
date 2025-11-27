@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Conference Hall — Viewer</title>
+<script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+<style>
+body{
+    margin:0;
+    background:linear-gradient(180deg,#06060b,#0f1530);
+    color:white;
+    font-family:Inter, sans-serif;
+}
+.wrap{
+    max-width:900px;
+    margin:40px auto;
+    text-align:center;
+}
+h1{
+    background:linear-gradient(90deg,#ffd54a,#ff7ab6);
+    -webkit-background-clip:text;
+    color:transparent;
+    font-size:42px;
+}
+.card{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:22px;
+    backdrop-filter:blur(10px);
+    margin-top:20px;
+}
+input{
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:16px;
+    width:80%;
+    border:none;
+    margin-top:10px;
+}
+button{
+    margin-top:20px;
+    padding:14px 28px;
+    font-size:16px;
+    border:0;
+    border-radius:14px;
+    background:linear-gradient(90deg,#ffd54a,#ff7ab6);
+    color:#0c0c0c;
+    font-weight:700;
+    cursor:pointer;
+}
+video{
+    width:100%;
+    margin-top:25px;
+    border-radius:18px;
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+    <h1>Конференц-зал — Участник</h1>
+
+    <div class="card">
+        <p>Введите ID хоста:</p>
+        <input id="hostIdInput" placeholder="ID хоста">
+        <button id="connectBtn">Подключиться</button>
+
+        <video id="screen" autoplay playsinline></video>
+    </div>
+</div>
+
+<script>
+const peer = new Peer();
+
+// подключение к хосту
+document.getElementById("connectBtn").onclick = () => {
+    const hostId = document.getElementById("hostIdInput").value.trim();
+    if(!hostId) return alert("Введите ID");
+
+    const call = peer.call(hostId, null);
+
+    call.on('stream', stream => {
+        document.getElementById("screen").srcObject = stream;
+    });
+};
+</script>
+
+</body>
+</html>
