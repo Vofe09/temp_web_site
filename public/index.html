@@ -5,6 +5,49 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>КВН — Галерея </title>
   <style>
+
+      /* --- Новый мини-хедер, теперь не на всю ширину --- */
+  #mini-header {
+      margin: 20px auto;               /* центрируем */
+      padding: 18px 26px;
+      max-width: 780px;                /* <<< ГЛАВНОЕ: ограничиваем ширину */
+      width: 90%;                      /* на мобильных чуть уже экрана */
+      
+      background: linear-gradient(135deg,
+        rgba(255,213,74,0.12),
+        rgba(255,122,182,0.10)
+      );
+
+      border-radius: 22px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 6px 30px rgba(2,6,23,0.5);
+  }
+
+  /* Навигация */
+  #mini-header nav {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+  }
+
+  /* Ссылки */
+  #mini-header nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.6px;
+      transition: color .25s ease, transform .25s ease;
+  }
+
+  /* Hover */
+  #mini-header nav a:hover {
+      color: #ffd54a;
+      transform: translateY(-2px);
+  }
+
+
     /* --- Переменные --- */
     :root{
       --bg-1: #06060b;
@@ -89,6 +132,13 @@
     <div class="blob b1"></div>
     <div class="blob b2"></div>
   </div>
+    <header>
+        <nav>
+            <a href="index.html">КВН</a>
+            <a href="cur.html">Кураторский час</a>
+            <a href="host.html">Род. Собрание</a>
+        </nav>
+    </header>
 
   <header>
     <h1>КВН</h1>
@@ -114,6 +164,8 @@
       <figure class="card" data-idx="5"><img src="img/photo5.jpg" alt="Фото 5"><figcaption class="meta"><div class="title">Номер 5</div><div class="sub">Интерактив</div></figcaption></figure>
       <figure class="card" data-idx="6"><img src="img/photo6.jpg" alt="Фото 6"><figcaption class="meta"><div class="title">Номер 6</div><div class="sub">Финал</div></figcaption></figure>
 
+
+      
     </div>
 
     <footer>Спасибо за внимание!</footer>
